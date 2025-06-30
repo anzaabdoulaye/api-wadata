@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS livraison (
+    id NUMERIC PRIMARY KEY,
+    statut VARCHAR(55) NOT NULL,
+    code_livraison VARCHAR(255) NOT NULL,
+    adresse_livraison VARCHAR(255) NOT NULL,
+    date_livraison DATE NOT NULL,
+    id_livreur INTEGER NOT NULL,
+    who_done VARCHAR(64) NOT NULL DEFAULT CURRENT_USER,
+    when_done TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    last_update TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_id_livreur FOREIGN KEY (id_livreur) REFERENCES livreur(id),
+    CONSTRAINT ck_statut_livraison CHECK (statut IN ('EN_PREPARATION','EXPEDIEE','LIVREE','ECHEC'))
+);
